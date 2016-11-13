@@ -7,8 +7,7 @@
 //
 
 import XCTest
-@testable import SqliteAccessFramework
-
+@testable import SqliteAccess
 class SqliteAccessFrameworkTests: XCTestCase {
     
     override func setUp() {

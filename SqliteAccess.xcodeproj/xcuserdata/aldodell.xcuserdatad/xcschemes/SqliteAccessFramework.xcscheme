@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "C870C79D1DC2EC8D005D88E8"
-               BuildableName = "SqliteAccessFramework.framework"
-               BlueprintName = "SqliteAccessFramework"
-               ReferencedContainer = "container:SqliteAccessFramework.xcodeproj">
+               BuildableName = "SqliteAccess.framework"
+               BlueprintName = "SqliteAccess"
+               ReferencedContainer = "container:SqliteAccess.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "C870C7A61DC2EC8D005D88E8"
-               BuildableName = "SqliteAccessFrameworkTests.xctest"
-               BlueprintName = "SqliteAccessFrameworkTests"
-               ReferencedContainer = "container:SqliteAccessFramework.xcodeproj">
+               BuildableName = "SqliteAccessTests.xctest"
+               BlueprintName = "SqliteAccessTests"
+               ReferencedContainer = "container:SqliteAccess.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -43,9 +43,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "C870C79D1DC2EC8D005D88E8"
-            BuildableName = "SqliteAccessFramework.framework"
-            BlueprintName = "SqliteAccessFramework"
-            ReferencedContainer = "container:SqliteAccessFramework.xcodeproj">
+            BuildableName = "SqliteAccess.framework"
+            BlueprintName = "SqliteAccess"
+            ReferencedContainer = "container:SqliteAccess.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -65,9 +65,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "C870C79D1DC2EC8D005D88E8"
-            BuildableName = "SqliteAccessFramework.framework"
-            BlueprintName = "SqliteAccessFramework"
-            ReferencedContainer = "container:SqliteAccessFramework.xcodeproj">
+            BuildableName = "SqliteAccess.framework"
+            BlueprintName = "SqliteAccess"
+            ReferencedContainer = "container:SqliteAccess.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -83,9 +83,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "C870C79D1DC2EC8D005D88E8"
-            BuildableName = "SqliteAccessFramework.framework"
-            BlueprintName = "SqliteAccessFramework"
-            ReferencedContainer = "container:SqliteAccessFramework.xcodeproj">
+            BuildableName = "SqliteAccess.framework"
+            BlueprintName = "SqliteAccess"
+            ReferencedContainer = "container:SqliteAccess.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>

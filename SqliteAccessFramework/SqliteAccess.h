@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+
 //! Project version number for SqliteAccessFramework.
 FOUNDATION_EXPORT double SqliteAccessFrameworkVersionNumber;
 
@@ -16,4 +17,4 @@ FOUNDATION_EXPORT const unsigned char SqliteAccessFrameworkVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <SqliteAccessFramework/PublicHeader.h>
 
-
+#import "sqlite3.h"
