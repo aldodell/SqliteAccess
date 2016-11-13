@@ -17,7 +17,7 @@ At glance, we have a DataRow array with all rows of you sql query.
 
 There are several DataColumn thats represents each column on the table.
 
-```[swift]
+```swift
  flightDataTable = DataTable(path: flightDatabasePath, name: "flights")
         let id = DataColumnInteger("id")
         let callsign = DataColumnString("callsign")
