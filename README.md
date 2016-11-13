@@ -8,7 +8,7 @@ Each DataTable object represents a table into a sqlite database.
 In swift: 
 
 ```swift
-let dt = DataTable(path: "/path/to/database.sqlite", table: "myTable")
+let dt = DataTable(path: "/path/to/database.sqlite", name: "myTable")
 ```
 
 # Undersanting DataTable object
@@ -16,4 +16,30 @@ A DataTable object contains several objects that perform all database operations
 At glance, we have a DataRow array with all rows of you sql query.
 
 There are several DataColumn thats represents each column on the table.
+
+```[swift]
+ flightDataTable = DataTable(path: flightDatabasePath, name: "flights")
+        let id = DataColumnInteger("id")
+        let callsign = DataColumnString("callsign")
+        let aircraftType =  DataColumnString("aircraftType")
+        let route = DataColumnString("route")
+        let hours = DataColumnDouble("hours")
+        let date = DataColumnDate("date")
+        let customer = DataColumnString("customer")
+        let notes = DataColumnString("notes")
+      
+      //editing id
+        id.notNull = true
+        id.autoincrement = true
+        id.primaryKey = true
+        id.unique = true
+        
+        flightDataTable.keyFieldName = "id"
+        
+        //Append columns
+        flightDataTable.appendColumn(columns: id,callsign,aircraftType,route,hours,date,customer,notes)
+       
+        //if not exists table, create it
+        flightDataTable.create()
+```
 
