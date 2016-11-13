@@ -6,6 +6,6 @@ This is another sqlite framework for iOS. The main idea is join all database log
 # Use
 In swift: 
 
-```
+```swift
 let dt = DataTable(path: "/path/to/database.sqlite", table: "myTable")
 ```
