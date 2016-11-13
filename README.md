@@ -28,7 +28,7 @@ There are several DataColumn thats represents each column on the table.
         let customer = DataColumnString("customer")
         let notes = DataColumnString("notes")
       
-      //editing id
+         //editing id
         id.notNull = true
         id.autoincrement = true
         id.primaryKey = true
