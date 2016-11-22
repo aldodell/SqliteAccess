@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>  Reference</title>
+    <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="js/jquery.min.js" defer></script>
+    <script src="js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a title="  Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="index.html"> Docs</a> (27% documented)</p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="index.html"> Reference</a>
+        <img id="carat" src="img/carat.png" />
+          Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Classes/Console.html">Console</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/Console/MESSAGE_LEVEL.html">– MESSAGE_LEVEL</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/DataColumnBase.html">DataColumnBase</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/DataColumnBlob.html">DataColumnBlob</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/DataColumnDate.html">DataColumnDate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/DataColumnDouble.html">DataColumnDouble</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/DataColumnInteger.html">DataColumnInteger</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/DataColumnPNGImage.html">DataColumnPNGImage</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/DataColumnString.html">DataColumnString</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/DataRow.html">DataRow</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/DataTable.html">DataTable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/DataTableBinding.html">DataTableBinding</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/DataTableBinding/Bond.html">– Bond</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Enums.html">Enums</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Enums/SqliteAccessRowStatus.html">SqliteAccessRowStatus</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/SqliteType.html">SqliteType</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Functions.html">Functions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Functions.html#/s:F12SqliteAccess12documentPathFT7addFileSS_SS">documentPath(addFile:)</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            
+            <a href='#sqliteaccess' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h1 id='sqliteaccess'>SqliteAccess</h1>
+<a href='#other-sqlite-framework-based-on-data-table-logic' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='other-sqlite-framework-based-on-data-table-logic'>Other sqlite framework based on Data Table logic</h2>
+
+<p>This is another sqlite framework for iOS. The main idea is join all database logic into a unique instance of DataTable object that open, manage and close connections with sqlite and all it&rsquo;s data.
+Each DataTable object represents a table into a sqlite database.</p>
+<a href='#at-glance' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='at-glance'>At glance</h2>
+
+<p>In swift: </p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">dt</span> <span class="o">=</span> <span class="kt">DataTable</span><span class="p">(</span><span class="nv">path</span><span class="p">:</span> <span class="s">"/path/to/database.sqlite"</span><span class="p">,</span> <span class="nv">name</span><span class="p">:</span> <span class="s">"myTable"</span><span class="p">)</span>
+</code></pre>
+<a href='#understanding-datatable-object' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='understanding-datatable-object'>Understanding DataTable object</h2>
+
+<p>A DataTable object contains several objects that perform all database operations for you.
+At glance, we have a DataRow array with all rows of you sql query.</p>
+
+<p>There are several DataColumn thats represents each column on the table.</p>
+<pre class="highlight swift"><code> <span class="k">let</span> <span class="nv">flightDataTable</span> <span class="o">=</span> <span class="kt">DataTable</span><span class="p">(</span><span class="nv">path</span><span class="p">:</span> <span class="n">flightDatabasePath</span><span class="p">,</span> <span class="nv">name</span><span class="p">:</span> <span class="s">"flights"</span><span class="p">)</span>
+        <span class="k">let</span> <span class="nv">id</span> <span class="o">=</span> <span class="kt">DataColumnInteger</span><span class="p">(</span><span class="s">"id"</span><span class="p">)</span>
+        <span class="k">let</span> <span class="nv">callsign</span> <span class="o">=</span> <span class="kt">DataColumnString</span><span class="p">(</span><span class="s">"callsign"</span><span class="p">)</span>
+        <span class="k">let</span> <span class="nv">aircraftType</span> <span class="o">=</span>  <span class="kt">DataColumnString</span><span class="p">(</span><span class="s">"aircraftType"</span><span class="p">)</span>
+        <span class="k">let</span> <span class="nv">route</span> <span class="o">=</span> <span class="kt">DataColumnString</span><span class="p">(</span><span class="s">"route"</span><span class="p">)</span>
+        <span class="k">let</span> <span class="nv">hours</span> <span class="o">=</span> <span class="kt">DataColumnDouble</span><span class="p">(</span><span class="s">"hours"</span><span class="p">)</span>
+        <span class="k">let</span> <span class="nv">date</span> <span class="o">=</span> <span class="kt">DataColumnDate</span><span class="p">(</span><span class="s">"date"</span><span class="p">)</span>
+        <span class="k">let</span> <span class="nv">customer</span> <span class="o">=</span> <span class="kt">DataColumnString</span><span class="p">(</span><span class="s">"customer"</span><span class="p">)</span>
+        <span class="k">let</span> <span class="nv">notes</span> <span class="o">=</span> <span class="kt">DataColumnString</span><span class="p">(</span><span class="s">"notes"</span><span class="p">)</span>
+
+         <span class="c1">//editing id</span>
+        <span class="n">id</span><span class="o">.</span><span class="n">notNull</span> <span class="o">=</span> <span class="kc">true</span>
+        <span class="n">id</span><span class="o">.</span><span class="n">autoincrement</span> <span class="o">=</span> <span class="kc">true</span>
+        <span class="n">id</span><span class="o">.</span><span class="n">primaryKey</span> <span class="o">=</span> <span class="kc">true</span>
+        <span class="n">id</span><span class="o">.</span><span class="n">unique</span> <span class="o">=</span> <span class="kc">true</span>
+
+        <span class="n">flightDataTable</span><span class="o">.</span><span class="n">keyFieldName</span> <span class="o">=</span> <span class="s">"id"</span>
+
+        <span class="c1">//Append columns</span>
+        <span class="n">flightDataTable</span><span class="o">.</span><span class="nf">appendColumn</span><span class="p">(</span><span class="nv">columns</span><span class="p">:</span> <span class="n">id</span><span class="p">,</span><span class="n">callsign</span><span class="p">,</span><span class="n">aircraftType</span><span class="p">,</span><span class="n">route</span><span class="p">,</span><span class="n">hours</span><span class="p">,</span><span class="n">date</span><span class="p">,</span><span class="n">customer</span><span class="p">,</span><span class="n">notes</span><span class="p">)</span>
+
+        <span class="c1">//if not exists table, create it</span>
+        <span class="n">flightDataTable</span><span class="o">.</span><span class="nf">create</span><span class="p">()</span>
+</code></pre>
+
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2016 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2016-11-21)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.2</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

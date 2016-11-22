@@ -1,0 +1,523 @@
+{
+  "warnings": [
+    {
+      "file": "/Users/aldodell/Documents/Xcode/IOS/Bibliotecas/SqliteAccessFramework/SqliteAccessFramework/DataColumnBase.swift",
+      "line": 11,
+      "symbol": "DataColumnBase",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aldodell/Documents/Xcode/IOS/Bibliotecas/SqliteAccessFramework/SqliteAccessFramework/DataColumnBase.swift",
+      "line": 14,
+      "symbol": "DataColumnBase.name",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aldodell/Documents/Xcode/IOS/Bibliotecas/SqliteAccessFramework/SqliteAccessFramework/DataColumnBase.swift",
+      "line": 15,
+      "symbol": "DataColumnBase.primaryKey",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aldodell/Documents/Xcode/IOS/Bibliotecas/SqliteAccessFramework/SqliteAccessFramework/DataColumnBase.swift",
+      "line": 16,
+      "symbol": "DataColumnBase.autoincrement",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aldodell/Documents/Xcode/IOS/Bibliotecas/SqliteAccessFramework/SqliteAccessFramework/DataColumnBase.swift",
+      "line": 17,
+      "symbol": "DataColumnBase.unique",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aldodell/Documents/Xcode/IOS/Bibliotecas/SqliteAccessFramework/SqliteAccessFramework/DataColumnBase.swift",
+      "line": 18,
+      "symbol": "DataColumnBase.notNull",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aldodell/Documents/Xcode/IOS/Bibliotecas/SqliteAccessFramework/SqliteAccessFramework/DataColumnBase.swift",
+      "line": 19,
+      "symbol": "DataColumnBase.sqliteType",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aldodell/Documents/Xcode/IOS/Bibliotecas/SqliteAccessFramework/SqliteAccessFramework/DataColumnBase.swift",
+      "line": 21,
+      "symbol": "DataColumnBase.init(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aldodell/Documents/Xcode/IOS/Bibliotecas/SqliteAccessFramework/SqliteAccessFramework/DataColumnBase.swift",
+      "line": 29,
+      "symbol": "DataColumnBase.init(name:primaryKey:autoincrement:unique:notNull:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aldodell/Documents/Xcode/IOS/Bibliotecas/SqliteAccessFramework/SqliteAccessFramework/DataColumnBase.swift",
+      "line": 40,
+      "symbol": "DataColumnBase.show()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aldodell/Documents/Xcode/IOS/Bibliotecas/SqliteAccessFramework/SqliteAccessFramework/DataColumnBlob.swift",
+      "line": 11,
+      "symbol": "DataColumnBlob",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aldodell/Documents/Xcode/IOS/Bibliotecas/SqliteAccessFramework/SqliteAccessFramework/DataColumnBlob.swift",
+      "line": 22,
+      "symbol": "DataColumnBlob.init(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aldodell/Documents/Xcode/IOS/Bibliotecas/SqliteAccessFramework/SqliteAccessFramework/DataColumnDate.swift",
+      "line": 11,
+      "symbol": "DataColumnDate",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aldodell/Documents/Xcode/IOS/Bibliotecas/SqliteAccessFramework/SqliteAccessFramework/DataColumnDate.swift",
+      "line": 38,
+      "symbol": "DataColumnDate.init(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aldodell/Documents/Xcode/IOS/Bibliotecas/SqliteAccessFramework/SqliteAccessFramework/DataColumnDouble.swift",
+      "line": 12,
+      "symbol": "DataColumnDouble",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aldodell/Documents/Xcode/IOS/Bibliotecas/SqliteAccessFramework/SqliteAccessFramework/DataColumnDouble.swift",
+      "line": 33,
+      "symbol": "DataColumnDouble.init(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aldodell/Documents/Xcode/IOS/Bibliotecas/SqliteAccessFramework/SqliteAccessFramework/DataColumnImage.swift",
+      "line": 11,
+      "symbol": "DataColumnPNGImage",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aldodell/Documents/Xcode/IOS/Bibliotecas/SqliteAccessFramework/SqliteAccessFramework/DataColumnImage.swift",
+      "line": 54,
+      "symbol": "DataColumnPNGImage.init(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aldodell/Documents/Xcode/IOS/Bibliotecas/SqliteAccessFramework/SqliteAccessFramework/DataColumnInteger.swift",
+      "line": 11,
+      "symbol": "DataColumnInteger",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aldodell/Documents/Xcode/IOS/Bibliotecas/SqliteAccessFramework/SqliteAccessFramework/DataColumnInteger.swift",
+      "line": 34,
+      "symbol": "DataColumnInteger.init(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aldodell/Documents/Xcode/IOS/Bibliotecas/SqliteAccessFramework/SqliteAccessFramework/DataColumnString.swift",
+      "line": 11,
+      "symbol": "DataColumnString",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aldodell/Documents/Xcode/IOS/Bibliotecas/SqliteAccessFramework/SqliteAccessFramework/DataColumnString.swift",
+      "line": 36,
+      "symbol": "DataColumnString.init(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aldodell/Documents/Xcode/IOS/Bibliotecas/SqliteAccessFramework/SqliteAccessFramework/DataRow.swift",
+      "line": 11,
+      "symbol": "DataRow",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aldodell/Documents/Xcode/IOS/Bibliotecas/SqliteAccessFramework/SqliteAccessFramework/DataRow.swift",
+      "line": 12,
+      "symbol": "DataRow.items",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aldodell/Documents/Xcode/IOS/Bibliotecas/SqliteAccessFramework/SqliteAccessFramework/DataRow.swift",
+      "line": 13,
+      "symbol": "DataRow.status",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aldodell/Documents/Xcode/IOS/Bibliotecas/SqliteAccessFramework/SqliteAccessFramework/DataRow.swift",
+      "line": 14,
+      "symbol": "DataRow.dataTable",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aldodell/Documents/Xcode/IOS/Bibliotecas/SqliteAccessFramework/SqliteAccessFramework/DataRow.swift",
+      "line": 16,
+      "symbol": "DataRow.init(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aldodell/Documents/Xcode/IOS/Bibliotecas/SqliteAccessFramework/SqliteAccessFramework/DataRow.swift",
+      "line": 30,
+      "symbol": "DataRow.delete()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aldodell/Documents/Xcode/IOS/Bibliotecas/SqliteAccessFramework/SqliteAccessFramework/DataTable.swift",
+      "line": 12,
+      "symbol": "DataTable",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aldodell/Documents/Xcode/IOS/Bibliotecas/SqliteAccessFramework/SqliteAccessFramework/DataTable.swift",
+      "line": 21,
+      "symbol": "DataTable.console",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aldodell/Documents/Xcode/IOS/Bibliotecas/SqliteAccessFramework/SqliteAccessFramework/DataTable.swift",
+      "line": 22,
+      "symbol": "DataTable.keyFieldName",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aldodell/Documents/Xcode/IOS/Bibliotecas/SqliteAccessFramework/SqliteAccessFramework/DataTable.swift",
+      "line": 39,
+      "symbol": "DataTable.init(path:name:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aldodell/Documents/Xcode/IOS/Bibliotecas/SqliteAccessFramework/SqliteAccessFramework/DataTable.swift",
+      "line": 46,
+      "symbol": "DataTable.init()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aldodell/Documents/Xcode/IOS/Bibliotecas/SqliteAccessFramework/SqliteAccessFramework/DataTable.swift",
+      "line": 80,
+      "symbol": "DataTable.nextRow()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aldodell/Documents/Xcode/IOS/Bibliotecas/SqliteAccessFramework/SqliteAccessFramework/DataTable.swift",
+      "line": 166,
+      "symbol": "DataTable.isEmpty()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aldodell/Documents/Xcode/IOS/Bibliotecas/SqliteAccessFramework/SqliteAccessFramework/DataTable.swift",
+      "line": 209,
+      "symbol": "DataTable.appendColumn(column:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aldodell/Documents/Xcode/IOS/Bibliotecas/SqliteAccessFramework/SqliteAccessFramework/DataTable.swift",
+      "line": 216,
+      "symbol": "DataTable.appendColumn(columns:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aldodell/Documents/Xcode/IOS/Bibliotecas/SqliteAccessFramework/SqliteAccessFramework/DataTable.swift",
+      "line": 223,
+      "symbol": "DataTable.columnBy(name:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aldodell/Documents/Xcode/IOS/Bibliotecas/SqliteAccessFramework/SqliteAccessFramework/DataTable.swift",
+      "line": 230,
+      "symbol": "DataTable.appendRow(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aldodell/Documents/Xcode/IOS/Bibliotecas/SqliteAccessFramework/SqliteAccessFramework/DataTable.swift",
+      "line": 460,
+      "symbol": "DataTable.showColumnsStructure()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aldodell/Documents/Xcode/IOS/Bibliotecas/SqliteAccessFramework/SqliteAccessFramework/DataTable.swift",
+      "line": 479,
+      "symbol": "DataTable.insertRow()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aldodell/Documents/Xcode/IOS/Bibliotecas/SqliteAccessFramework/SqliteAccessFramework/DataTable.swift",
+      "line": 486,
+      "symbol": "DataTable.insertRow(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aldodell/Documents/Xcode/IOS/Bibliotecas/SqliteAccessFramework/SqliteAccessFramework/DataTable.swift",
+      "line": 505,
+      "symbol": "DataTable.clear()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aldodell/Documents/Xcode/IOS/Bibliotecas/SqliteAccessFramework/SqliteAccessFramework/DataTable.swift",
+      "line": 714,
+      "symbol": "DataTable.show()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aldodell/Documents/Xcode/IOS/Bibliotecas/SqliteAccessFramework/SqliteAccessFramework/DataTableBinding.swift",
+      "line": 11,
+      "symbol": "DataTableBinding",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aldodell/Documents/Xcode/IOS/Bibliotecas/SqliteAccessFramework/SqliteAccessFramework/DataTableBinding.swift",
+      "line": 13,
+      "symbol": "DataTableBinding.Bond",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aldodell/Documents/Xcode/IOS/Bibliotecas/SqliteAccessFramework/SqliteAccessFramework/DataTableBinding.swift",
+      "line": 14,
+      "symbol": "DataTableBinding.Bond.toView",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aldodell/Documents/Xcode/IOS/Bibliotecas/SqliteAccessFramework/SqliteAccessFramework/DataTableBinding.swift",
+      "line": 15,
+      "symbol": "DataTableBinding.Bond.toDataTable",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aldodell/Documents/Xcode/IOS/Bibliotecas/SqliteAccessFramework/SqliteAccessFramework/DataTableBinding.swift",
+      "line": 19,
+      "symbol": "DataTableBinding.bindings",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aldodell/Documents/Xcode/IOS/Bibliotecas/SqliteAccessFramework/SqliteAccessFramework/DataTableBinding.swift",
+      "line": 20,
+      "symbol": "DataTableBinding.dataTable",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aldodell/Documents/Xcode/IOS/Bibliotecas/SqliteAccessFramework/SqliteAccessFramework/DataTableBinding.swift",
+      "line": 23,
+      "symbol": "DataTableBinding.init(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aldodell/Documents/Xcode/IOS/Bibliotecas/SqliteAccessFramework/SqliteAccessFramework/DataTableBinding.swift",
+      "line": 29,
+      "symbol": "DataTableBinding.bind(toView:toDataTable:field:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aldodell/Documents/Xcode/IOS/Bibliotecas/SqliteAccessFramework/SqliteAccessFramework/DataTableBinding.swift",
+      "line": 35,
+      "symbol": "DataTableBinding.syncViews(indexRow:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aldodell/Documents/Xcode/IOS/Bibliotecas/SqliteAccessFramework/SqliteAccessFramework/DataTableBinding.swift",
+      "line": 43,
+      "symbol": "DataTableBinding.syncDataTable(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aldodell/Documents/Xcode/IOS/Bibliotecas/SqliteAccessFramework/SqliteAccessFramework/SqliteAccess.swift",
+      "line": 11,
+      "symbol": "SqliteType",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aldodell/Documents/Xcode/IOS/Bibliotecas/SqliteAccessFramework/SqliteAccessFramework/SqliteAccess.swift",
+      "line": 12,
+      "symbol": "SqliteType.TEXT",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aldodell/Documents/Xcode/IOS/Bibliotecas/SqliteAccessFramework/SqliteAccessFramework/SqliteAccess.swift",
+      "line": 13,
+      "symbol": "SqliteType.INTEGER",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aldodell/Documents/Xcode/IOS/Bibliotecas/SqliteAccessFramework/SqliteAccessFramework/SqliteAccess.swift",
+      "line": 14,
+      "symbol": "SqliteType.REAL",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aldodell/Documents/Xcode/IOS/Bibliotecas/SqliteAccessFramework/SqliteAccessFramework/SqliteAccess.swift",
+      "line": 15,
+      "symbol": "SqliteType.BLOB",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aldodell/Documents/Xcode/IOS/Bibliotecas/SqliteAccessFramework/SqliteAccessFramework/SqliteAccess.swift",
+      "line": 19,
+      "symbol": "SqliteAccessRowStatus",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aldodell/Documents/Xcode/IOS/Bibliotecas/SqliteAccessFramework/SqliteAccessFramework/SqliteAccess.swift",
+      "line": 20,
+      "symbol": "SqliteAccessRowStatus.NORMAL",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aldodell/Documents/Xcode/IOS/Bibliotecas/SqliteAccessFramework/SqliteAccessFramework/SqliteAccess.swift",
+      "line": 21,
+      "symbol": "SqliteAccessRowStatus.INSERTED",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aldodell/Documents/Xcode/IOS/Bibliotecas/SqliteAccessFramework/SqliteAccessFramework/SqliteAccess.swift",
+      "line": 22,
+      "symbol": "SqliteAccessRowStatus.UPDATED",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aldodell/Documents/Xcode/IOS/Bibliotecas/SqliteAccessFramework/SqliteAccessFramework/SqliteAccess.swift",
+      "line": 23,
+      "symbol": "SqliteAccessRowStatus.DELETED",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aldodell/Documents/Xcode/IOS/Bibliotecas/SqliteAccessFramework/SqliteAccessFramework/SqliteAccess.swift",
+      "line": 26,
+      "symbol": "documentPath(addFile:)",
+      "symbol_kind": "source.lang.swift.decl.function.free",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aldodell/Documents/Xcode/IOS/Bibliotecas/SqliteAccessFramework/SqliteAccessFramework/SqliteAccess.swift",
+      "line": 35,
+      "symbol": "Console",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aldodell/Documents/Xcode/IOS/Bibliotecas/SqliteAccessFramework/SqliteAccessFramework/SqliteAccess.swift",
+      "line": 36,
+      "symbol": "Console.MESSAGE_LEVEL",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aldodell/Documents/Xcode/IOS/Bibliotecas/SqliteAccessFramework/SqliteAccessFramework/SqliteAccess.swift",
+      "line": 38,
+      "symbol": "Console.MESSAGE_LEVEL.NOTHING",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aldodell/Documents/Xcode/IOS/Bibliotecas/SqliteAccessFramework/SqliteAccessFramework/SqliteAccess.swift",
+      "line": 39,
+      "symbol": "Console.MESSAGE_LEVEL.ERROR",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aldodell/Documents/Xcode/IOS/Bibliotecas/SqliteAccessFramework/SqliteAccessFramework/SqliteAccess.swift",
+      "line": 40,
+      "symbol": "Console.MESSAGE_LEVEL.WARNING",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aldodell/Documents/Xcode/IOS/Bibliotecas/SqliteAccessFramework/SqliteAccessFramework/SqliteAccess.swift",
+      "line": 41,
+      "symbol": "Console.MESSAGE_LEVEL.INFO",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aldodell/Documents/Xcode/IOS/Bibliotecas/SqliteAccessFramework/SqliteAccessFramework/SqliteAccess.swift",
+      "line": 42,
+      "symbol": "Console.MESSAGE_LEVEL.ALL",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aldodell/Documents/Xcode/IOS/Bibliotecas/SqliteAccessFramework/SqliteAccessFramework/SqliteAccess.swift",
+      "line": 45,
+      "symbol": "Console.level",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aldodell/Documents/Xcode/IOS/Bibliotecas/SqliteAccessFramework/SqliteAccessFramework/SqliteAccess.swift",
+      "line": 47,
+      "symbol": "Console.log(message:level:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    }
+  ],
+  "source_directory": "/Users/aldodell/Documents/Xcode/IOS/Bibliotecas/SqliteAccessFramework"
+}
