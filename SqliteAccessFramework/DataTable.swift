@@ -9,6 +9,9 @@
 import UIKit
 
 
+/**
+ * Main class that wraps bussines logic for a Sqlite Table handling
+ */
 public class DataTable: NSObject {
     
     
@@ -36,6 +39,10 @@ public class DataTable: NSObject {
     //Save record position
     var internalPosition : Int = 0
     
+    /**
+     * - Parameter path: Path to sqlite database file
+     * - Parameter name: Table's name
+     */
     public init(path: String, name: String)
     {
         self.databasePath = path
@@ -47,7 +54,9 @@ public class DataTable: NSObject {
         
     }
     
-    
+    /**
+     * - Returns: Returns a `DataRow` object at index given
+     */
     public subscript (indexRow : Int) -> DataRow {
         get {
             return self.rows[indexRow]
@@ -475,7 +484,10 @@ public class DataTable: NSObject {
         return r
     }
     
-    
+    /**
+     * Insert a new DataRow into DataTable object with `status` set to `.INSERTED`
+     * - Returns: Return the DataRow created
+     */
     public func insertRow () -> DataRow {
         let r = self.newRow()
         r.status = .INSERTED
@@ -483,6 +495,11 @@ public class DataTable: NSObject {
         return r
     }
     
+    /**
+     * Insert a new DataRow into DataTable object with `status` set to `.INSERTED`.
+     * - Parameter values: A dictionary object with tuple Key (field's name) and value.
+     * - Returns: Return the DataRow created
+     */
     public func insertRow (_ values : [String : Any]) -> Void {
         let dr = self.newRow()
         dr.items.removeAll()
