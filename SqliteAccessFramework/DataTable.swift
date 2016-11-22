@@ -14,7 +14,9 @@ public class DataTable: NSObject {
     
     ///Collection of DataRow objects.
     public var rows : [DataRow] = []
+    ///Collection of DataColumn objects.
     public var columns : [DataColumnBase] = []
+    /// Table's name
     public var name : String = ""
     public var console = Console()
     public var keyFieldName : String = ""
@@ -22,11 +24,17 @@ public class DataTable: NSObject {
     var databasePath : String = ""
     var database : OpaquePointer? = nil
     
+    /// Insert SQL statement string
     public var sqlInsert = ""
+    /// Delete SQL statement string
     public var sqlDelete = ""
+    /// Update SQL statement string
     public var sqlUpdate = ""
+    /// Select SQL statement string
     public var sqlSelect = ""
     
+    //Save record position
+    var internalPosition : Int = 0
     
     public init(path: String, name: String)
     {
@@ -54,13 +62,147 @@ public class DataTable: NSObject {
     
     public subscript(indexRow: Int, key : String) -> Any {
         get {
-            return self.rows[indexRow].items[key]
+            return self.rows[indexRow].items[key]!
         }
         
         set (value) {
             self.rows[indexRow].items[key] = value
         }
     }
+    
+    /**
+     Return the first row
+     */
+    public func firstRow () -> DataRow {
+        return self.rows.first!
+    }
+    
+    public func nextRow() -> DataRow? {
+        var r : DataRow?
+        
+        if internalPosition >= self.rows.count
+        { r = nil } else {
+            r = self.rows[internalPosition]
+            internalPosition += 1
+        }
+        
+        return r
+    }
+    
+    /**
+     Return current row
+     */
+    public func currentRow() -> DataRow? {
+        if !endOfRecords {
+            return self.rows[self.internalPosition]
+        } else {
+            return nil
+        }
+    }
+    
+    /**
+     Return a field from the first row
+     */
+    public func firstValue(field: String) -> Any? {
+        return self.rows.first?[field]
+        
+    }
+    
+    
+    /**
+     Return next value
+     */
+    public func nextValue(_ field: String) -> Any? {
+        var r : Any?
+        if internalPosition >= self.rows.count
+        {
+            r = nil
+        } else {
+            r = self.rows[internalPosition][field]
+            internalPosition += 1
+        }
+        return r
+        
+    }
+    
+    /**
+     Return or set actually record position
+     */
+    public var position : Int {
+        get {
+            return internalPosition
+        }
+        
+        set (value) {
+            if value < self.rows.count {
+                internalPosition = value
+            }
+        }
+    }
+    
+    /**
+     Reset pisition pointer to 0
+     */
+    public func reset () {
+        internalPosition = 0
+    }
+    
+    /**
+     Return a boolean value that means if End Of Records has been reached.
+     */
+    public var endOfRecords : Bool {
+        get {
+            if internalPosition >= self.rows.count {
+                return true
+            } else {
+                return false
+            }
+        }
+    }
+    
+    
+    
+    
+    public func isEmpty () -> Bool {
+        if self.rows.count == 0 { return true } else { return false}
+    }
+    
+    
+    /**
+     Execute a pure SQL statement string without result
+     */
+    public func execute(sql: String) {
+        open()
+        sqlite3_exec(self.database, sql, nil, nil, nil)
+        close()
+    }
+    
+    /**
+     Return a single integer result from a sql query
+     */
+    public func intResult(sql: String) -> Int? {
+        
+        var query : OpaquePointer? = nil
+        var r : Int32?
+        
+        open()
+        if sqlite3_prepare(self.database, sql, -1, &query, nil) == SQLITE_OK {
+            if (sqlite3_step(query)==SQLITE_ROW) {
+                r = sqlite3_column_int(query, 0)
+            }
+        }
+        sqlite3_finalize(query)
+        close()
+        
+        if r != nil {
+            return Int(r!)
+        } else {
+            return nil
+        }
+        
+        
+    }
+    
     
     
     
@@ -308,6 +450,7 @@ public class DataTable: NSObject {
             
             
         }
+        sqlite3_finalize(query)
         close()
     }
     
@@ -364,11 +507,50 @@ public class DataTable: NSObject {
         self.columns.removeAll()
     }
     
+    /**
+     Return count of all records
+     Like:
+     ```
+     select count(*) from myTable
+     ```
+     - Returns: Integer with count of all records avalibles
+     */
+    public func count () -> Int {
+        var query : OpaquePointer? = nil
+        var r : Int32 = -1
+        open()
+        
+        let sql = "select count(*) from \(self.name)"
+        
+        if sqlite3_prepare_v2(self.database, sql, -1, &query, nil) == SQLITE_OK {
+            if sqlite3_step(query) == SQLITE_ROW {
+                console.log(message:"Counting records \(self.name)")
+                r = sqlite3_column_int(query, 0)
+                
+            } else {
+                let errmsg = String(cString: sqlite3_errmsg(self.database))
+                console.log(message:"Error counting records: table \(self.name). \(errmsg)", level: .ERROR)
+                print(sql)
+                
+            }
+        } else {
+            let errmsg = String(cString: sqlite3_errmsg(self.database))
+            console.log(message:"Error counting records: table \(self.name). \(errmsg)", level: .ERROR)
+        }
+        
+        sqlite3_finalize(query)
+        close()
+        return Int(r)
+        
+    }
     
     /**
      * Load data from swlite to DataTable object. If the sql parameter is used then self.selectSql is obviated.
      */
     public func load(sql: String = "") {
+        
+        //El puntero de posición de registro lo pasamos a 0
+        self.reset()
         
         //Si no hay columnas las inferimos
         if sql == "" && self.columns.count == 0 {
@@ -417,7 +599,10 @@ public class DataTable: NSObject {
     
     
     
-    
+    /**
+     Process all changes pending into rows.
+     This method read status property of each row and execute sql code for them.
+     */
     public func update() {
         
         if self.sqlInsert ==  "" { self.sqlInsert = insertSqlString() }
@@ -475,6 +660,8 @@ public class DataTable: NSObject {
                         n += 1
                     }
                     
+                    
+                    
                 } else {
                     let errmsg = String(cString: sqlite3_errmsg(self.database))
                     console.log(message:"Error inserting  row \(self.name). \(errmsg)", level: .ERROR)
@@ -489,7 +676,9 @@ public class DataTable: NSObject {
                     let errmsg = String(cString: sqlite3_errmsg(self.database))
                     console.log(message:"Error inserting  row  \(self.name). \(errmsg)", level: .ERROR)
                 }
+                
             }
+            sqlite3_finalize(query)
             row.status = .NORMAL
         }
         close()
@@ -505,7 +694,7 @@ public class DataTable: NSObject {
     public func extract (field: String ) -> [Any] {
         var r : [Any] = []
         for row in self.rows {
-            r.append(row.items[field])
+            r.append(row.items[field]!)
         }
         return r
     }

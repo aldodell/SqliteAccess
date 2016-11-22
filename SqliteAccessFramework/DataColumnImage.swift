@@ -26,7 +26,7 @@ public class DataColumnPNGImage: DataColumnBase {
         let length = sqlite3_column_bytes(query, index)
         let data = NSData(bytes: bytes, length: Int(length))
         let image = UIImage(data: data as Data)
-        return image
+        return image!
         
     }
     

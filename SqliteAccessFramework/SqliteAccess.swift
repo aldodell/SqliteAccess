@@ -29,6 +29,9 @@ public func documentPath(addFile: String) -> String {
 }
 
 
+
+
+
 public class Console {
     public enum MESSAGE_LEVEL : Int32
     {

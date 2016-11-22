@@ -33,7 +33,7 @@ public class DataRow: NSObject {
     
     public subscript (key : String) -> Any {
         get {
-            return self.items[key]
+            return self.items[key]!
         }
         
         set (value) {
