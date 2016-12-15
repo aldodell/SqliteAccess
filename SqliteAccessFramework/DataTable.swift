@@ -79,6 +79,22 @@ public class DataTable: NSObject {
         }
     }
     
+    
+    /**
+     Path for sqlite file database
+     */
+    public var path : String {
+        get {
+            return self.databasePath
+        }
+        
+        set (value) {
+            self.databasePath = value
+        }
+    }
+    
+    
+    
     /**
      Return the first row
      */
@@ -209,14 +225,13 @@ public class DataTable: NSObject {
             return nil
         }
         
-        
     }
     
     
     
     
     public func appendColumn(column: DataColumnBase) {
-        console.log(message: "Appending \(column.name) column")
+        console.log(message: "Appending \(column.name) column", level: .INFO)
         if column.primaryKey { self.keyFieldName = column.name }
         self.columns.append(column)
         
@@ -263,11 +278,21 @@ public class DataTable: NSObject {
         return sql
     }
     
-    func updateSqlString () -> String {
+    
+    public func  updateSqlString (exceptColumns : DataColumnBase... ) -> String {
+        return updateSqlString(exceptColumns: exceptColumns)
+    }
+    
+    
+    
+    public func updateSqlString (exceptColumns : [DataColumnBase] ) -> String {
         var sql = "update \(self.name) set "
         for column in self.columns {
             // if column.name != self.keyFieldName {
-            sql += "\(column.name) = :\(column.name),"
+            
+            if !exceptColumns.contains(where: {c in c.name == column.name}) {
+                sql += "\(column.name) = :\(column.name),"
+            }
             //}
         }
         sql.remove(at: sql.index(before: sql.endIndex))
@@ -279,18 +304,25 @@ public class DataTable: NSObject {
         return sql
     }
     
-    func deleteSqlString() ->String {
+    public func deleteSqlString(exceptColumns : DataColumnBase...) ->String {
         let sql = "delete from \(self.name) where \(self.keyFieldName) = :\(self.keyFieldName)"
         return sql
     }
     
-    func insertSqlString() ->String {
+    
+    public func insertSqlString(exceptColumns : DataColumnBase...) ->String {
+        return insertSqlString(exceptColumns : exceptColumns)
+    }
+    
+    public func insertSqlString(exceptColumns : [DataColumnBase]) ->String {
         var sql = "insert into \(self.name) ("
         
         for column in self.columns
         {
             // if column.name != self.keyFieldName {
-            sql += column.name + ","
+            if !exceptColumns.contains(where: {c in c.name == column.name}) {
+                sql += column.name + ","
+            }
             // }
         }
         sql.remove(at: sql.index(before: sql.endIndex))
@@ -300,8 +332,9 @@ public class DataTable: NSObject {
         {
             
             // if column.name != self.keyFieldName {
-            
-            sql += ":\(column.name),"
+            if !exceptColumns.contains(where: {c in c.name == column.name}) {
+                sql += ":\(column.name),"
+            }
             // }
         }
         sql.remove(at: sql.index(before: sql.endIndex))
@@ -337,7 +370,7 @@ public class DataTable: NSObject {
         if self.database == nil {
             var db: OpaquePointer? = nil
             if sqlite3_open(self.databasePath, &db) == SQLITE_OK {
-                console.log(message: "Successfully opened connection to database at \(databasePath)")
+                console.log(message: "Successfully opened connection to database at \(databasePath)", level: .INFO)
                 //  return db!
             } else {
                 console.log(message:"Unable to open database.", level: .ERROR)
@@ -352,7 +385,7 @@ public class DataTable: NSObject {
     func close() ->Void {
         sqlite3_close(self.database)
         self.database = nil
-        console.log(message:"Database closed!")
+        console.log(message:"Database closed!", level: .INFO)
     }
     
     /**
@@ -418,7 +451,7 @@ public class DataTable: NSObject {
         let sql = createTableSqlString()
         if sqlite3_prepare_v2(self.database,sql, -1, &query, nil) == SQLITE_OK {
             if sqlite3_step(query) == SQLITE_DONE {
-                console.log(message:"Create table \(self.name)")
+                console.log(message:"Create table \(self.name)", level: .INFO)
                 console.log(message:sql, level: .WARNING)
                 
                 
@@ -446,7 +479,7 @@ public class DataTable: NSObject {
         open()
         if sqlite3_prepare_v2(self.database, "drop table if exists \"\(self.name)\"", -1, &query, nil) == SQLITE_OK {
             if sqlite3_step(query) == SQLITE_DONE {
-                console.log(message:"Drop table \(self.name)")
+                console.log(message:"Drop table \(self.name)", level: .INFO)
                 
             } else {
                 let errmsg = String(cString: sqlite3_errmsg(self.database))
@@ -481,6 +514,7 @@ public class DataTable: NSObject {
      */
     public func newRow () -> DataRow {
         let r = DataRow(self)
+        r.status = .INSERTED
         return r
     }
     
@@ -508,7 +542,7 @@ public class DataTable: NSObject {
         }
         dr.status = .INSERTED
         self.rows.append(dr)
-        console.log(message: "Appending row")
+        console.log(message: "Appending row", level: .INFO)
     }
     
     
@@ -524,6 +558,14 @@ public class DataTable: NSObject {
         self.columns.removeAll()
     }
     
+    
+    /**
+     Return the number of rows
+     */
+    public func count() -> Int {
+        return self.rows.count
+    }
+    
     /**
      Return count of all records
      Like:
@@ -532,7 +574,7 @@ public class DataTable: NSObject {
      ```
      - Returns: Integer with count of all records avalibles
      */
-    public func count () -> Int {
+    public func countAllRecords () -> Int {
         var query : OpaquePointer? = nil
         var r : Int32 = -1
         open()
@@ -541,7 +583,7 @@ public class DataTable: NSObject {
         
         if sqlite3_prepare_v2(self.database, sql, -1, &query, nil) == SQLITE_OK {
             if sqlite3_step(query) == SQLITE_ROW {
-                console.log(message:"Counting records \(self.name)")
+                console.log(message:"Counting records \(self.name)", level: .INFO)
                 r = sqlite3_column_int(query, 0)
                 
             } else {
@@ -564,7 +606,8 @@ public class DataTable: NSObject {
     /**
      * Load data from swlite to DataTable object. If the sql parameter is used then self.selectSql is obviated.
      */
-    public func load(sql: String = "") {
+    @discardableResult
+    public func load(sql: String = "") -> DataTable {
         
         //El puntero de posición de registro lo pasamos a 0
         self.reset()
@@ -595,7 +638,7 @@ public class DataTable: NSObject {
                     
                     let columnName = String(cString: sqlite3_column_name(query, n))
                     let column = self.columns.first(where: {$0.name == columnName})!
-                    console.log(message:"Loading by column \(columnName), \(n)")
+                    console.log(message:"Loading by column \(columnName), \(n)", level: .INFO)
                     row.items[columnName] = column.value(query: query!, index:n)
                     
                 }
@@ -612,6 +655,8 @@ public class DataTable: NSObject {
         
         close()
         
+        return self
+        
     }
     
     
@@ -620,11 +665,19 @@ public class DataTable: NSObject {
      Process all changes pending into rows.
      This method read status property of each row and execute sql code for them.
      */
-    public func update() {
+    public func update(exceptColumns: DataColumnBase... ){
+        update(exceptColumns: exceptColumns)
+    }
+    
+    /**
+     Process all changes pending into rows.
+     This method read status property of each row and execute sql code for them.
+     */
+    public func update(exceptColumns: [DataColumnBase]) {
         
-        if self.sqlInsert ==  "" { self.sqlInsert = insertSqlString() }
+        if self.sqlInsert ==  "" { self.sqlInsert = insertSqlString(exceptColumns: exceptColumns) }
         if self.sqlDelete ==  "" { self.sqlDelete = deleteSqlString() }
-        if self.sqlUpdate ==  "" { self.sqlUpdate = updateSqlString() }
+        if self.sqlUpdate ==  "" { self.sqlUpdate = updateSqlString(exceptColumns: exceptColumns) }
         
         open()
         
@@ -658,23 +711,26 @@ public class DataTable: NSObject {
             if row.status != .NORMAL {
                 if sqlite3_prepare_v2(self.database, sql, -1, &query, nil) == SQLITE_OK {
                     
-                    console.log(message:"Proccessing \(sql)")
+                    console.log(message:"Proccessing \(sql)", level: .INFO)
                     
                     
                     var n : Int32 = 1
                     for column in columns {
                         
-                        let columnName = column.name
-                        let value = row.items[columnName]
-                        
-                        console.log(message: columnName, level: .INFO)
-                        console.log(message: String(describing: value), level: .INFO)
-                        
-                        if value != nil {
-                            column.value(query: query!, index: n, newValue: value!)
+                        if !exceptColumns.contains(where: {c in c.name == column.name}) {
+                            
+                            let columnName = column.name
+                            let value = row.items[columnName]
+                            
+                            console.log(message: columnName, level: .INFO)
+                            console.log(message: String(describing: value), level: .INFO)
+                            
+                            if value != nil {
+                                column.value(query: query!, index: n, newValue: value!)
+                            }
+                            
+                            n += 1
                         }
-                        
-                        n += 1
                     }
                     
                     
@@ -688,7 +744,7 @@ public class DataTable: NSObject {
                 
                 
                 if sqlite3_step(query) == SQLITE_DONE {
-                    console.log(message: "Proccessed...")
+                    console.log(message: "Proccessed...", level: .INFO)
                 } else {
                     let errmsg = String(cString: sqlite3_errmsg(self.database))
                     console.log(message:"Error inserting  row  \(self.name). \(errmsg)", level: .ERROR)
@@ -699,9 +755,39 @@ public class DataTable: NSObject {
             row.status = .NORMAL
         }
         close()
+        
+        self.sqlInsert = ""
+        self.sqlUpdate = ""
+        self.sqlDelete = ""
     }
     
     
+    
+    /**
+     Merge into this table rows from dataTable parameter, including all fields excepts declared as exceptDataColumns
+     */
+    public func merge(dataTable: DataTable, exceptColumns : DataColumnBase...) {
+        
+        self.sqlInsert = insertSqlString(exceptColumns: exceptColumns)
+        
+        for row in dataTable.rows {
+            /*
+             let r = self.newRow()
+             for column in self.columns {
+             
+             
+             if !exceptDataColumns.contains(where: {c in c.name == column.name}) {
+             r[column.name] = row[column.name]
+             }
+             }
+             self.rows.append(r)
+             */
+            row.status = .INSERTED
+            self.rows.append(row)
+            
+        }
+        
+    }
     
     
     
@@ -721,8 +807,10 @@ public class DataTable: NSObject {
     /**
      * Return a DataTable object with same initial parameters, path and name
      */
-    public func newInstance() -> DataTable {
-        let dt = DataTable(path: self.databasePath, name: self.name)
+    public func newInstance(newPath:String? = nil) -> DataTable {
+        let path = newPath ?? self.databasePath
+        
+        let dt = DataTable(path: path, name: self.name)
         dt.columns = self.columns
         return dt
     }
@@ -794,7 +882,7 @@ public class DataTable: NSObject {
             }
             
         } catch  let error as NSError  {
-            console.log(message: error.localizedDescription , level: .ERROR)
+            console.log(message: error.localizedDescription, level: .ERROR)
         }
         
     }

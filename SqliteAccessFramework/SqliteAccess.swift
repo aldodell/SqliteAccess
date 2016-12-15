@@ -46,8 +46,8 @@ public class Console {
     
     public var level : MESSAGE_LEVEL = .ERROR
     
-    public func log (message : String, level: MESSAGE_LEVEL = .INFO) {
-        if level.rawValue >= self.level.rawValue {
+    public func log (message : String, level messageLevel: MESSAGE_LEVEL = .INFO) {
+        if messageLevel.rawValue >= self.level.rawValue {
             print(message)
         }
     }
