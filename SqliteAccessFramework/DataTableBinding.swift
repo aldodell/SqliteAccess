@@ -8,6 +8,8 @@
 
 import UIKit
 
+
+@available(*, deprecated: 1.1)
 public class DataTableBinding: NSObject {
     
     public struct Bond {

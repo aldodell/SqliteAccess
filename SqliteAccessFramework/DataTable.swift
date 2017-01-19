@@ -15,6 +15,8 @@ import UIKit
 public class DataTable: NSObject {
     
     
+    // MARK: initialization
+    
     ///Collection of DataRow objects.
     public var rows : [DataRow] = []
     ///Collection of DataColumn objects.
@@ -36,6 +38,8 @@ public class DataTable: NSObject {
     /// Select SQL statement string
     public var sqlSelect = ""
     
+    public let OK = "OK"
+    
     //Save record position
     var internalPosition : Int = 0
     
@@ -53,6 +57,9 @@ public class DataTable: NSObject {
     public override init(){
         
     }
+    
+    
+    //MARK: subscripts
     
     /**
      * - Returns: Returns a `DataRow` object at index given
@@ -95,12 +102,44 @@ public class DataTable: NSObject {
     
     
     
+    //MARK: get rows
+    
     /**
      Return the first row
      */
-    public func firstRow () -> DataRow {
-        return self.rows.first!
+    public func firstRow () -> DataRow? {
+        if self.rows.count > 0 {
+            return self.rows[0]
+        } else {
+            return nil
+        }
+        
+        
     }
+    
+    /**
+     Return last row
+     */
+    public func lastRow() -> DataRow? {
+        if self.rows.count > 0 {
+            return self.rows[self.rows.count - 1]
+        } else {
+            return nil
+        }
+    }
+    
+    
+    /**
+     Return a field from the first row
+     */
+    public func firstValue(field: String) -> Any? {
+        return self.rows.first?[field]
+        
+    }
+    
+    
+    
+    //MARK: Syncronization
     
     public func nextRow() -> DataRow? {
         var r : DataRow?
@@ -125,13 +164,6 @@ public class DataTable: NSObject {
         }
     }
     
-    /**
-     Return a field from the first row
-     */
-    public func firstValue(field: String) -> Any? {
-        return self.rows.first?[field]
-        
-    }
     
     
     /**
@@ -166,7 +198,7 @@ public class DataTable: NSObject {
     }
     
     /**
-     Reset pisition pointer to 0
+     Reset position pointer to 0
      */
     public func reset () {
         internalPosition = 0
@@ -186,26 +218,101 @@ public class DataTable: NSObject {
     }
     
     
-    
+    //MARK: helper functions
     
     public func isEmpty () -> Bool {
         if self.rows.count == 0 { return true } else { return false}
     }
     
+    /**
+     * Extract an array with elements from a field
+     */
+    @available(iOS, introduced: 1.0, deprecated: 1.1, renamed: "toArray")
+    public func extract (field: String ) -> [Any] {
+        var r : [Any] = []
+        for row in self.rows {
+            r.append(row.items[field]!)
+        }
+        return r
+    }
+    
+    
+    /**
+     * Extract an array with elements from a field
+     */
+    public func toArray (field: String ) -> [Any] {
+        var r : [Any] = []
+        for row in self.rows {
+            r.append(row.items[field]!)
+        }
+        return r
+    }
+    
+    
+    
+    
+    /**
+     * Return a DataTable object with same initial parameters, path and name
+     */
+    public func newInstance(newPath:String? = nil) -> DataTable {
+        let path = newPath ?? self.databasePath
+        
+        let dt = DataTable(path: path, name: self.name)
+        dt.columns = self.columns
+        return dt
+    }
+    
+    
+    /**
+     * Show table name, columns names, and items. For debug purpose.
+     */
+    public func show() -> String {
+        var r = "Table \(self.name)\n"
+        for row in rows {
+            for column in columns {
+                r += "\t\(column.name) : \(row.items[column.name]!)\n"
+            }
+            r+="--\n"
+        }
+        return r
+    }
+    
+    
+    /**
+     Return an array with only a field. SQL statement must return only a field.
+     */
+    public func oneFieldArray <DC:DataColumnBase>(column: DC, sql: String) -> [Any]? {
+        let dt = self.newInstance()
+        dt.appendColumn(columns: column)
+        return dt.load(sql: sql).toArray(field: column.name)
+        
+        
+        
+    }
+    
+    
+    
+    
+    //MARK: execution area:
     
     /**
      Execute a pure SQL statement string without result
      */
-    public func execute(sql: String) {
+    @discardableResult
+    public func execute(sql: String) -> String {
         open()
-        sqlite3_exec(self.database, sql, nil, nil, nil)
+        if sqlite3_exec(self.database, sql, nil, nil, nil) != SQLITE_OK {
+            let errmsg = String(cString: sqlite3_errmsg(self.database))
+            return errmsg
+        }
         close()
+        return OK
     }
     
     /**
      Return a single integer result from a sql query
      */
-    public func intResult(sql: String) -> Int? {
+    public  func intResult(sql: String) -> Int? {
         
         var query : OpaquePointer? = nil
         var r : Int32?
@@ -228,8 +335,37 @@ public class DataTable: NSObject {
     }
     
     
+    /**
+     Return a single String result from a sql query
+     */
+    public func stringResult(sql: String) -> String? {
+        
+        var query : OpaquePointer? = nil
+        var r : String?
+        
+        open()
+        if sqlite3_prepare(self.database, sql, -1, &query, nil) == SQLITE_OK {
+            if (sqlite3_step(query)==SQLITE_ROW) {
+                r = String(cString: sqlite3_column_text(query, 0))
+            }
+        }
+        sqlite3_finalize(query)
+        close()
+        
+        if r != nil {
+            return r
+        } else {
+            return nil
+        }
+        
+    }
     
     
+    //MARK: Columns area:
+    
+    /**
+     * Add a DataColumn object into DataTable
+     */
     public func appendColumn(column: DataColumnBase) {
         console.log(message: "Appending \(column.name) column", level: .INFO)
         if column.primaryKey { self.keyFieldName = column.name }
@@ -237,6 +373,9 @@ public class DataTable: NSObject {
         
     }
     
+    /**
+     * Add several DataColumn object into DataTable
+     */
     public func appendColumn(columns: DataColumnBase...) {
         for column in columns {
             self.appendColumn(column: column)
@@ -244,6 +383,9 @@ public class DataTable: NSObject {
     }
     
     
+    /**
+     * Return a DataColumn object by its name
+     */
     public func columnBy(name: String) -> DataColumnBase {
         return self.columns.first(where: { (dc) -> Bool in
             dc.name == name
@@ -251,12 +393,139 @@ public class DataTable: NSObject {
     }
     
     
+    /**
+     * Append a DataRow into rows array of DataTable object
+     * --
+     * Be careful with a DataRow that is appending into rows Array, becuase this method do not change status property, so if you want make an insert operation before use this method you must to declare .INSERT at status rows's property
+     */
     public func appendRow (_ row: DataRow)
     {
         self.rows.append(row)
     }
     
     
+    
+    
+    //MARK: Rows area:
+    public func showColumnsStructure() -> String  {
+        var r = ""
+        for column in self.columns {
+            r += column.show()
+            r += "\n---\n"
+        }
+        return r
+    }
+    
+    
+    /**
+     * Create new DataRow object with status INSERTED
+     */
+    public func newRow () -> DataRow {
+        let r = DataRow(self)
+        r.status = .INSERTED
+        return r
+    }
+    
+    /**
+     * Insert a new DataRow into DataTable object with `status` set to `.INSERTED`
+     * - Returns: Return the DataRow created
+     */
+    @discardableResult
+    public func insertRow () -> DataRow {
+        let r = self.newRow()
+        r.status = .INSERTED
+        self.rows.append(r)
+        return r
+    }
+    
+    /**
+     * Insert a new DataRow into DataTable object with `status` set to `.INSERTED`.
+     * - Parameter values: A dictionary object with tuple Key (field's name) and value.
+     * - Returns: Return the DataRow created
+     */
+    @discardableResult
+    public func insertRow (_ values : [String : Any]) -> DataRow {
+        let dr = self.newRow()
+        dr.items.removeAll()
+        for key in values.keys {
+            dr.items[key] = values[key]
+        }
+        dr.status = .INSERTED
+        self.rows.append(dr)
+        console.log(message: "Appending row", level: .INFO)
+        return dr
+    }
+    
+    
+    
+    
+    /**
+     * Remove all rows on this DataTable
+     */
+    public func clearRows() {
+        self.rows.removeAll()
+    }
+    
+    /**
+     * Clears rows and columns from this DataTable
+     */
+    public func clear() {
+        clearRows()
+        self.columns.removeAll()
+    }
+    
+    
+    /**
+     Return the number of rows
+     */
+    public func count() -> Int {
+        return self.rows.count
+    }
+    
+    /**
+     Return count of all records
+     Like:
+     ```
+     select count(*) from myTable
+     ```
+     - Returns: Integer with count of all records avalibles
+     */
+    public func countAllRecords () -> Int {
+        var query : OpaquePointer? = nil
+        var r : Int32 = -1
+        open()
+        
+        let sql = "select count(*) from \(self.name)"
+        
+        if sqlite3_prepare_v2(self.database, sql, -1, &query, nil) == SQLITE_OK {
+            if sqlite3_step(query) == SQLITE_ROW {
+                console.log(message:"Counting records \(self.name)", level: .INFO)
+                r = sqlite3_column_int(query, 0)
+                
+            } else {
+                let errmsg = String(cString: sqlite3_errmsg(self.database))
+                console.log(message:"Error counting records: table \(self.name). \(errmsg)", level: .ERROR)
+                print(sql)
+                
+            }
+        } else {
+            let errmsg = String(cString: sqlite3_errmsg(self.database))
+            console.log(message:"Error counting records: table \(self.name). \(errmsg)", level: .ERROR)
+        }
+        
+        sqlite3_finalize(query)
+        close()
+        return Int(r)
+        
+    }
+    
+    //MARK: SQL area:
+    
+    
+    
+    /**
+     * Return a string that contains SQL CREATE instrucctions
+     */
     func createTableSqlString() -> String {
         var sql : String = "CREATE TABLE IF NOT EXISTS \"\(self.name)\" ("
         
@@ -279,12 +548,18 @@ public class DataTable: NSObject {
     }
     
     
+    /**
+     * Return a string that contains SQL update statement
+     */
     public func  updateSqlString (exceptColumns : DataColumnBase... ) -> String {
         return updateSqlString(exceptColumns: exceptColumns)
     }
     
     
     
+    /**
+     * Return a string that contains SQL update statement
+     */
     public func updateSqlString (exceptColumns : [DataColumnBase] ) -> String {
         var sql = "update \(self.name) set "
         for column in self.columns {
@@ -304,16 +579,28 @@ public class DataTable: NSObject {
         return sql
     }
     
+    
+    
+    /**
+     * Return a string that contains SQL delete statement
+     */
     public func deleteSqlString(exceptColumns : DataColumnBase...) ->String {
         let sql = "delete from \(self.name) where \(self.keyFieldName) = :\(self.keyFieldName)"
         return sql
     }
     
     
+    /**
+     * Return a string that contains SQL insert statement
+     */
     public func insertSqlString(exceptColumns : DataColumnBase...) ->String {
         return insertSqlString(exceptColumns : exceptColumns)
     }
     
+    
+    /**
+     * Return a string that contains SQL insert statement
+     */
     public func insertSqlString(exceptColumns : [DataColumnBase]) ->String {
         var sql = "insert into \(self.name) ("
         
@@ -343,6 +630,10 @@ public class DataTable: NSObject {
     }
     
     
+    
+    /**
+     * Return a string that contains SQL select statement
+     */
     func selectSqlString (limit : String = "") -> String {
         
         var sql = "select  "
@@ -358,9 +649,6 @@ public class DataTable: NSObject {
         return sql
         
     }
-    
-    
-    
     
     
     /**
@@ -393,6 +681,7 @@ public class DataTable: NSObject {
      * ---
      * It should be used when they have not built the columns manually.
      */
+    @available(*, deprecated: 1.1)
     func inferStructure() {
         let sql = "PRAGMA table_info (\(self.name))"
         
@@ -499,122 +788,23 @@ public class DataTable: NSObject {
     
     
     
-    public func showColumnsStructure() -> String  {
-        var r = ""
-        for column in self.columns {
-            r += column.show()
-            r += "\n---\n"
-        }
-        return r
-    }
-    
-    
-    /**
-     * Create new DataRow object with status INSERTED
-     */
-    public func newRow () -> DataRow {
-        let r = DataRow(self)
-        r.status = .INSERTED
-        return r
-    }
-    
-    /**
-     * Insert a new DataRow into DataTable object with `status` set to `.INSERTED`
-     * - Returns: Return the DataRow created
-     */
-    public func insertRow () -> DataRow {
-        let r = self.newRow()
-        r.status = .INSERTED
-        self.rows.append(r)
-        return r
-    }
-    
-    /**
-     * Insert a new DataRow into DataTable object with `status` set to `.INSERTED`.
-     * - Parameter values: A dictionary object with tuple Key (field's name) and value.
-     * - Returns: Return the DataRow created
-     */
-    public func insertRow (_ values : [String : Any]) -> Void {
-        let dr = self.newRow()
-        dr.items.removeAll()
-        for key in values.keys {
-            dr.items[key] = values[key]
-        }
-        dr.status = .INSERTED
-        self.rows.append(dr)
-        console.log(message: "Appending row", level: .INFO)
-    }
-    
-    
-    /**
-     * Remove all rows on this DataTable
-     */
-    public func clearRows() {
-        self.rows.removeAll()
-    }
-    
-    public func clear() {
-        clearRows()
-        self.columns.removeAll()
-    }
-    
-    
-    /**
-     Return the number of rows
-     */
-    public func count() -> Int {
-        return self.rows.count
-    }
-    
-    /**
-     Return count of all records
-     Like:
-     ```
-     select count(*) from myTable
-     ```
-     - Returns: Integer with count of all records avalibles
-     */
-    public func countAllRecords () -> Int {
-        var query : OpaquePointer? = nil
-        var r : Int32 = -1
-        open()
-        
-        let sql = "select count(*) from \(self.name)"
-        
-        if sqlite3_prepare_v2(self.database, sql, -1, &query, nil) == SQLITE_OK {
-            if sqlite3_step(query) == SQLITE_ROW {
-                console.log(message:"Counting records \(self.name)", level: .INFO)
-                r = sqlite3_column_int(query, 0)
-                
-            } else {
-                let errmsg = String(cString: sqlite3_errmsg(self.database))
-                console.log(message:"Error counting records: table \(self.name). \(errmsg)", level: .ERROR)
-                print(sql)
-                
-            }
-        } else {
-            let errmsg = String(cString: sqlite3_errmsg(self.database))
-            console.log(message:"Error counting records: table \(self.name). \(errmsg)", level: .ERROR)
-        }
-        
-        sqlite3_finalize(query)
-        close()
-        return Int(r)
-        
-    }
     
     /**
      * Load data from swlite to DataTable object. If the sql parameter is used then self.selectSql is obviated.
      */
     @discardableResult
-    public func load(sql: String = "") -> DataTable {
+    public func load(sql: String = "", clear:Bool = true) -> DataTable {
+        
+        if clear {
+            self.clearRows()
+        }
         
         //El puntero de posición de registro lo pasamos a 0
         self.reset()
         
         //Si no hay columnas las inferimos
         if sql == "" && self.columns.count == 0 {
-            self.inferStructure()
+           //  self.inferStructure()
         }
         
         //Cargamos la instrucción sql por defecto si no se proporciona una
@@ -660,6 +850,13 @@ public class DataTable: NSObject {
     }
     
     
+    /**
+     Process all changes pending into rows.
+     This method read status property of each row and execute sql code for them.
+     */
+    public func update() {
+        update(exceptColumns: [])
+    }
     
     /**
      Process all changes pending into rows.
@@ -791,41 +988,6 @@ public class DataTable: NSObject {
     
     
     
-    /**
-     * Extract an array with elements from a field
-     */
-    public func extract (field: String ) -> [Any] {
-        var r : [Any] = []
-        for row in self.rows {
-            r.append(row.items[field]!)
-        }
-        return r
-    }
-    
-    
-    
-    /**
-     * Return a DataTable object with same initial parameters, path and name
-     */
-    public func newInstance(newPath:String? = nil) -> DataTable {
-        let path = newPath ?? self.databasePath
-        
-        let dt = DataTable(path: path, name: self.name)
-        dt.columns = self.columns
-        return dt
-    }
-    
-    
-    public func show() -> String {
-        var r = "Table \(self.name)\n"
-        for row in rows {
-            for column in columns {
-                r += "\t\(column.name) : \(row.items[column.name]!)\n"
-            }
-            r+="--\n"
-        }
-        return r
-    }
     
     
     /**
@@ -886,8 +1048,6 @@ public class DataTable: NSObject {
         }
         
     }
-    
-    
     
     
 }

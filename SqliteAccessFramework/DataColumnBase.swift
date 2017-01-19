@@ -26,7 +26,7 @@ public class DataColumnBase {
     
     
     
-   public  init(name: String, primaryKey : Bool = false, autoincrement : Bool = false, unique : Bool = false, notNull : Bool = false)
+   public init(name: String, primaryKey : Bool = false, autoincrement : Bool = false, unique : Bool = false, notNull : Bool = false)
     {
         self.name = name
         self.unique = unique
@@ -47,7 +47,7 @@ public class DataColumnBase {
     
     
     /**
-     * Get a String from aq query
+     * Get a String from a query
      */
     func  value (query: OpaquePointer, index : Int32) -> Any? {
         return nil

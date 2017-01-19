@@ -219,64 +219,22 @@
     },
     {
       "file": "/Users/aldodell/Documents/Xcode/IOS/Bibliotecas/SqliteAccessFramework/SqliteAccessFramework/DataTable.swift",
-      "line": 89,
+      "line": 105,
       "symbol": "DataTable.nextRow()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/aldodell/Documents/Xcode/IOS/Bibliotecas/SqliteAccessFramework/SqliteAccessFramework/DataTable.swift",
-      "line": 175,
+      "line": 191,
       "symbol": "DataTable.isEmpty()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/aldodell/Documents/Xcode/IOS/Bibliotecas/SqliteAccessFramework/SqliteAccessFramework/DataTable.swift",
-      "line": 218,
-      "symbol": "DataTable.appendColumn(column:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/aldodell/Documents/Xcode/IOS/Bibliotecas/SqliteAccessFramework/SqliteAccessFramework/DataTable.swift",
-      "line": 225,
-      "symbol": "DataTable.appendColumn(columns:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/aldodell/Documents/Xcode/IOS/Bibliotecas/SqliteAccessFramework/SqliteAccessFramework/DataTable.swift",
-      "line": 232,
-      "symbol": "DataTable.columnBy(name:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/aldodell/Documents/Xcode/IOS/Bibliotecas/SqliteAccessFramework/SqliteAccessFramework/DataTable.swift",
-      "line": 239,
-      "symbol": "DataTable.appendRow(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/aldodell/Documents/Xcode/IOS/Bibliotecas/SqliteAccessFramework/SqliteAccessFramework/DataTable.swift",
-      "line": 469,
+      "line": 540,
       "symbol": "DataTable.showColumnsStructure()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/aldodell/Documents/Xcode/IOS/Bibliotecas/SqliteAccessFramework/SqliteAccessFramework/DataTable.swift",
-      "line": 522,
-      "symbol": "DataTable.clear()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/aldodell/Documents/Xcode/IOS/Bibliotecas/SqliteAccessFramework/SqliteAccessFramework/DataTable.swift",
-      "line": 731,
-      "symbol": "DataTable.show()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },

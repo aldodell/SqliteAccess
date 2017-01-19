@@ -54,4 +54,86 @@ public class Console {
 }
 
 
+public class MessageBox  {
+    
+    public enum ResultButtons  {
+        case Ok
+        case Cancel
+        case Yes
+        case No
+        
+    }
+    
+    public var viewController : UIViewController
+    public var result : ResultButtons?
+    public var handler : ((ResultButtons)->Void)?
+    
+    public init(_ vc : UIViewController)
+    {
+        self.viewController = vc
+    }
+    
+    @discardableResult
+    public func show (_ title: String, _ message : String, _ resultButtons: ResultButtons... ) {
+        
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        var ok  = UIAlertAction()
+        var yes = UIAlertAction()
+        var cancel = UIAlertAction()
+        var no = UIAlertAction()
+        
+        
+        let languageCode =  Locale.current.languageCode!
+        
+        switch languageCode {
+            
+        case "es":
+            
+            ok = UIAlertAction(title: "Ok", style: .default, handler: {obj in if self.handler != nil {self.handler!(.Ok)}})
+            no = UIAlertAction(title: "No", style: .destructive, handler: {obj in if self.handler != nil {self.handler!(.No)}})
+            yes = UIAlertAction(title: "Sí", style: .default, handler: {obj in if self.handler != nil {self.handler!(.Yes)}})
+            cancel = UIAlertAction(title: "Cancelar", style: .cancel, handler: {obj in if self.handler != nil {self.handler!(.Cancel)}})
+            
+            
+        default:
+            ok = UIAlertAction(title: "Ok", style: .default, handler: {obj in if self.handler != nil {self.handler!(.Ok)}})
+            no = UIAlertAction(title: "No", style: .destructive, handler: {obj in if self.handler != nil {self.handler!(.No)}})
+            yes = UIAlertAction(title: "Yes", style: .default, handler: {obj in if self.handler != nil {self.handler!(.Yes)}})
+            cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: {obj in if self.handler != nil {self.handler!(.Cancel)}})
+            
+        }
+        
+        
+        
+        
+        for r in resultButtons {
+            
+            switch r {
+            case .Ok:
+                alert.addAction(ok)
+            case .Cancel:
+                alert.addAction(cancel)
+            case .Yes:
+                alert.addAction(yes)
+            case .No:
+                alert.addAction(no)
+            }
+            
+        }
+        self.viewController.present(alert, animated: true, completion: nil)
+    }
+    
+    @discardableResult
+    public func show(_ title: String, _ message: String, actions : UIAlertAction... ){
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        for action in actions {
+            alert.addAction(action)
+        }
+        self.viewController.present(alert, animated: true, completion: nil)
+    }
+    
+}
+
+
+
 

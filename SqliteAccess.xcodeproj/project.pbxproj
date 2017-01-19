@@ -23,6 +23,7 @@
 		C870C7E11DC2FE65005D88E8 /* sqlite3.h in Headers */ = {isa = PBXBuildFile; fileRef = C870C7E01DC2FE65005D88E8 /* sqlite3.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C870C7E31DC2FF2E005D88E8 /* DataTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C870C7E21DC2FF2E005D88E8 /* DataTable.swift */; };
 		C89A40A71DCE96C600BCF45E /* DataTableBinding.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89A40A61DCE96C600BCF45E /* DataTableBinding.swift */; };
+		C8C002521E2EEEC80012983A /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C002511E2EEEC70012983A /* extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,7 @@
 		C870C7E01DC2FE65005D88E8 /* sqlite3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sqlite3.h; path = ../sqlite3.h; sourceTree = "<group>"; };
 		C870C7E21DC2FF2E005D88E8 /* DataTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataTable.swift; sourceTree = "<group>"; };
 		C89A40A61DCE96C600BCF45E /* DataTableBinding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataTableBinding.swift; sourceTree = "<group>"; };
+		C8C002511E2EEEC70012983A /* extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +116,7 @@
 				C870C7E01DC2FE65005D88E8 /* sqlite3.h */,
 				C870C7A21DC2EC8D005D88E8 /* Info.plist */,
 				C89A40A61DCE96C600BCF45E /* DataTableBinding.swift */,
+				C8C002511E2EEEC70012983A /* extensions.swift */,
 			);
 			name = SqliteAccess;
 			path = SqliteAccessFramework;
@@ -196,7 +199,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0800;
-				LastUpgradeCheck = 0810;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "Aldo Dell";
 				TargetAttributes = {
 					C870C79D1DC2EC8D005D88E8 = {
@@ -263,6 +266,7 @@
 				C870C7C81DC2EE5B005D88E8 /* DataColumnString.swift in Sources */,
 				C870C7C41DC2EE5B005D88E8 /* DataColumnDate.swift in Sources */,
 				C870C7CD1DC2EE7E005D88E8 /* SqliteAccess.swift in Sources */,
+				C8C002521E2EEEC80012983A /* extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -327,7 +331,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -362,7 +366,8 @@
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -376,7 +381,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
@@ -393,6 +398,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = TV4Y8HRN4A;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -416,6 +422,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = TV4Y8HRN4A;
 				DYLIB_COMPATIBILITY_VERSION = 1;
