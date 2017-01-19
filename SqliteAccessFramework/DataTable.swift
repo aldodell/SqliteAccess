@@ -43,6 +43,12 @@ public class DataTable: NSObject {
     //Save record position
     var internalPosition : Int = 0
     
+    
+        
+    
+    
+    
+    
     /**
      * - Parameter path: Path to sqlite database file
      * - Parameter name: Table's name
@@ -216,6 +222,12 @@ public class DataTable: NSObject {
             }
         }
     }
+    
+    
+    
+    
+    
+    
     
     
     //MARK: helper functions

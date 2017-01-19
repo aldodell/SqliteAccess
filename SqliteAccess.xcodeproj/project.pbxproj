@@ -22,6 +22,7 @@
 		C870C7DB1DC2F852005D88E8 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C870C7DA1DC2F852005D88E8 /* libsqlite3.dylib */; };
 		C870C7E11DC2FE65005D88E8 /* sqlite3.h in Headers */ = {isa = PBXBuildFile; fileRef = C870C7E01DC2FE65005D88E8 /* sqlite3.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C870C7E31DC2FF2E005D88E8 /* DataTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C870C7E21DC2FF2E005D88E8 /* DataTable.swift */; };
+		C88FFE961E31691100DD9DB4 /* DataTableSyncronizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88FFE951E31691100DD9DB4 /* DataTableSyncronizer.swift */; };
 		C89A40A71DCE96C600BCF45E /* DataTableBinding.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89A40A61DCE96C600BCF45E /* DataTableBinding.swift */; };
 		C8C002521E2EEEC80012983A /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C002511E2EEEC70012983A /* extensions.swift */; };
 /* End PBXBuildFile section */
@@ -56,6 +57,7 @@
 		C870C7DA1DC2F852005D88E8 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = ../../../../../../../usr/lib/libsqlite3.dylib; sourceTree = "<group>"; };
 		C870C7E01DC2FE65005D88E8 /* sqlite3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sqlite3.h; path = ../sqlite3.h; sourceTree = "<group>"; };
 		C870C7E21DC2FF2E005D88E8 /* DataTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataTable.swift; sourceTree = "<group>"; };
+		C88FFE951E31691100DD9DB4 /* DataTableSyncronizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataTableSyncronizer.swift; sourceTree = "<group>"; };
 		C89A40A61DCE96C600BCF45E /* DataTableBinding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataTableBinding.swift; sourceTree = "<group>"; };
 		C8C002511E2EEEC70012983A /* extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -103,6 +105,7 @@
 			isa = PBXGroup;
 			children = (
 				C870C7E21DC2FF2E005D88E8 /* DataTable.swift */,
+				C88FFE951E31691100DD9DB4 /* DataTableSyncronizer.swift */,
 				C870C7CC1DC2EE7E005D88E8 /* SqliteAccess.swift */,
 				C870C7CA1DC2EE6C005D88E8 /* DataColumnBase.swift */,
 				C870C7BB1DC2EE5B005D88E8 /* DataColumnBlob.swift */,
@@ -264,6 +267,7 @@
 				C870C7C61DC2EE5B005D88E8 /* DataColumnImage.swift in Sources */,
 				C870C7E31DC2FF2E005D88E8 /* DataTable.swift in Sources */,
 				C870C7C81DC2EE5B005D88E8 /* DataColumnString.swift in Sources */,
+				C88FFE961E31691100DD9DB4 /* DataTableSyncronizer.swift in Sources */,
 				C870C7C41DC2EE5B005D88E8 /* DataColumnDate.swift in Sources */,
 				C870C7CD1DC2EE7E005D88E8 /* SqliteAccess.swift in Sources */,
 				C8C002521E2EEEC80012983A /* extensions.swift in Sources */,
