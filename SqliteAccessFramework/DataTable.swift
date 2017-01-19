@@ -41,12 +41,8 @@ public class DataTable: NSObject {
     public let OK = "OK"
     
     //Save record position
+    @available(*, deprecated: 1.1)
     var internalPosition : Int = 0
-    
-    
-        
-    
-    
     
     
     /**
@@ -146,7 +142,7 @@ public class DataTable: NSObject {
     
     
     //MARK: Syncronization
-    
+    @available(*, deprecated: 1.1)
     public func nextRow() -> DataRow? {
         var r : DataRow?
         
@@ -162,6 +158,7 @@ public class DataTable: NSObject {
     /**
      Return current row
      */
+    @available(*, deprecated: 1.1)
     public func currentRow() -> DataRow? {
         if !endOfRecords {
             return self.rows[self.internalPosition]
@@ -175,6 +172,7 @@ public class DataTable: NSObject {
     /**
      Return next value
      */
+    @available(*, deprecated: 1.1)
     public func nextValue(_ field: String) -> Any? {
         var r : Any?
         if internalPosition >= self.rows.count
@@ -191,6 +189,7 @@ public class DataTable: NSObject {
     /**
      Return or set actually record position
      */
+    @available(*, deprecated: 1.1)
     public var position : Int {
         get {
             return internalPosition
@@ -206,6 +205,7 @@ public class DataTable: NSObject {
     /**
      Reset position pointer to 0
      */
+    @available(*, deprecated: 1.1)
     public func reset () {
         internalPosition = 0
     }
@@ -213,6 +213,7 @@ public class DataTable: NSObject {
     /**
      Return a boolean value that means if End Of Records has been reached.
      */
+    @available(*, deprecated: 1.1)
     public var endOfRecords : Bool {
         get {
             if internalPosition >= self.rows.count {
@@ -812,11 +813,12 @@ public class DataTable: NSObject {
         }
         
         //El puntero de posición de registro lo pasamos a 0
-        self.reset()
+        // self.reset()
+        
         
         //Si no hay columnas las inferimos
         if sql == "" && self.columns.count == 0 {
-           //  self.inferStructure()
+            //  self.inferStructure()
         }
         
         //Cargamos la instrucción sql por defecto si no se proporciona una
